@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="aclik.dao.StudentMapper">
+	<resultMap id="BaseResultMap" type="aclik.model.Student">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="studId" property="studid" jdbcType="VARCHAR" />
+		<result column="studName" property="studname" jdbcType="VARCHAR" />
+		<result column="studPwd" property="studpwd" jdbcType="VARCHAR" />
+		<result column="studSex" property="studsex" jdbcType="VARCHAR" />
+		<result column="studPlace" property="studplace" jdbcType="VARCHAR" />
+		<result column="studPhone" property="studphone" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, studId, studName, studPwd, studSex, studPlace,
+		studPhone
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from tb_stud
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		tb_stud
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="aclik.model.Student">
+		insert into tb_stud (id,
+		studId, studName,
+		studPwd, studSex, studPlace,
+		studPhone)
+		values
+		(#{id,jdbcType=INTEGER}, #{studid,jdbcType=VARCHAR},
+		#{studname,jdbcType=VARCHAR},
+		#{studpwd,jdbcType=VARCHAR},
+		#{studsex,jdbcType=VARCHAR}, #{studplace,jdbcType=VARCHAR},
+		#{studphone,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="aclik.model.Student">
+		insert into tb_stud
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="studid != null">
+				studId,
+			</if>
+			<if test="studname != null">
+				studName,
+			</if>
+			<if test="studpwd != null">
+				studPwd,
+			</if>
+			<if test="studsex != null">
+				studSex,
+			</if>
+			<if test="studplace != null">
+				studPlace,
+			</if>
+			<if test="studphone != null">
+				studPhone,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="studid != null">
+				#{studid,jdbcType=VARCHAR},
+			</if>
+			<if test="studname != null">
+				#{studname,jdbcType=VARCHAR},
+			</if>
+			<if test="studpwd != null">
+				#{studpwd,jdbcType=VARCHAR},
+			</if>
+			<if test="studsex != null">
+				#{studsex,jdbcType=VARCHAR},
+			</if>
+			<if test="studplace != null">
+				#{studplace,jdbcType=VARCHAR},
+			</if>
+			<if test="studphone != null">
+				#{studphone,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="aclik.model.Student">
+		update tb_stud
+		<set>
+			<if test="studid != null">
+				studId = #{studid,jdbcType=VARCHAR},
+			</if>
+			<if test="studname != null">
+				studName = #{studname,jdbcType=VARCHAR},
+			</if>
+			<if test="studpwd != null">
+				studPwd = #{studpwd,jdbcType=VARCHAR},
+			</if>
+			<if test="studsex != null">
+				studSex = #{studsex,jdbcType=VARCHAR},
+			</if>
+			<if test="studplace != null">
+				studPlace = #{studplace,jdbcType=VARCHAR},
+			</if>
+			<if test="studphone != null">
+				studPhone = #{studphone,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="aclik.model.Student">
+		update tb_stud
+		set
+		studId = #{studid,jdbcType=VARCHAR},
+		studName =
+		#{studname,jdbcType=VARCHAR},
+		studPwd = #{studpwd,jdbcType=VARCHAR},
+		studSex = #{studsex,jdbcType=VARCHAR},
+		studPlace =
+		#{studplace,jdbcType=VARCHAR},
+		studPhone =
+		#{studphone,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>
